@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Question.dart';
 
 void main() => runApp(Quizzler());
 
@@ -10,7 +11,7 @@ class Quizzler extends StatelessWidget {
         backgroundColor: Colors.grey.shade900,
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
+          padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: QuizPage(),
           ),
         ),
@@ -25,13 +26,22 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  List<String> question = [
+ 
+ /* List<String> question = [
     'You can lead a cow down stairs but not up stairs.',
     'Approximately one quarter of human bones are in the feet.',
      'A slug\'s blood is green.'
 
+  ];*/
+  //List<bool>answer=[false,true,true];
+
+  List<Question>questionBank=[
+     Question('You can lead a cow down stairs but not up stairs.', false),
+     Question('Approximately one quarter of human bones are in the feet.', true),
+     Question('A slug\'s blood is green.', true),
+
+
   ];
-  List<bool>answer=[false,true,true];
   int questionNumber=0;
   @override
   Widget build(BuildContext context) {
@@ -45,7 +55,8 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-              question[questionNumber],
+                questionBank[questionNumber].question,
+              //question[questionNumber],
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -69,7 +80,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool answerCheck=answer[questionNumber];
+                bool answerCheck= questionBank[questionNumber].answer;
                 if(answerCheck==true)
                 {
                   print('you got right answer');
@@ -99,7 +110,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool answerCheck=answer[questionNumber];
+                bool answerCheck= questionBank[questionNumber].answer;
                 if(answerCheck==false)
                 {
                   print('you got right answer');
